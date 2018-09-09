@@ -1,4 +1,4 @@
-package com.telstra.sunil;
+package com.telstra.sunil.view;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.telstra.sunil.view.adapter.HeaderDataAdapter;
+import com.telstra.sunil.R;
 import com.telstra.sunil.databinding.ActivityMainBinding;
 import com.telstra.sunil.viewmodel.HeaderViewModel;
 

@@ -58,6 +58,12 @@ public class HeaderViewModel extends Observable {
         if (!Utils.isNetworkAvailable(context)) {
             Snackbar.make(view, R.string.network_error, Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
+            messageLabel.set(context.getString(R.string.network_error)
+                    + "\n"
+                    + context.getString(R.string.load_data));
+            progressBar.set(View.GONE);
+            rowLabel.set(View.VISIBLE);
+            rowRecycler.set(View.GONE);
             return;
         }
         fetchData();
@@ -79,6 +85,13 @@ public class HeaderViewModel extends Observable {
             @Override
             public void onSuccess(HeaderListData headerListData) {
                 Log.d(TAG, "List of data = " + headerListData);
+                if(headerListData == null) {
+                    messageLabel.set(context.getString(R.string.callback_error));
+                    progressBar.set(View.GONE);
+                    rowLabel.set(View.VISIBLE);
+                    rowRecycler.set(View.GONE);
+                    return;
+                }
                 updateRowDataList(headerListData.getRows(), headerListData.getTitle());
                 progressBar.set(View.GONE);
                 rowLabel.set(View.GONE);

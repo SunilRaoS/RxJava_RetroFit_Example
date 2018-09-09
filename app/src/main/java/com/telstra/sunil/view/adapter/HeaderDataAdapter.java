@@ -1,4 +1,4 @@
-package com.telstra.sunil;
+package com.telstra.sunil.view.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.telstra.sunil.R;
 import com.telstra.sunil.databinding.ItemRowsBinding;
 import com.telstra.sunil.model.RowItem;
 import com.telstra.sunil.viewmodel.ItemRowViewModel;
