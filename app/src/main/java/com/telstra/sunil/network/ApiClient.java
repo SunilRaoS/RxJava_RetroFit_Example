@@ -1,7 +1,5 @@
 package com.telstra.sunil.network;
 
-import android.content.Context;
-
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.telstra.sunil.utility.Utils;
 
@@ -10,8 +8,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     private static Retrofit retrofit = null;
+    private static ApiService apiService;
 
-    public static Retrofit getClient(Context context) {
+    private static Retrofit getClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(Utils.BASE_URL)
@@ -20,5 +19,12 @@ public class ApiClient {
                     .build();
         }
         return retrofit;
+    }
+
+    public static ApiService getRetrofitService() {
+        if (apiService == null) {
+            apiService = ApiClient.getClient().create(ApiService.class);
+        }
+        return apiService;
     }
 }
