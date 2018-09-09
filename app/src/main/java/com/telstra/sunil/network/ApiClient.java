@@ -6,6 +6,9 @@ import com.telstra.sunil.utility.Utils;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Using the Retrofit with RxJava adapter
+ */
 public class ApiClient {
     private static Retrofit retrofit = null;
     private static ApiService apiService;

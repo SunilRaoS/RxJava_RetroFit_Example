@@ -5,6 +5,10 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+/**
+ * POJO model class to hold the JSON response from the server
+ * This holds the entire data response
+ */
 public class HeaderListData {
 
     @SerializedName("title")

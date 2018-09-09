@@ -3,6 +3,10 @@ package com.telstra.sunil.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * POJO model class to hold the Row data items response from the server
+ *
+ */
 public class RowItem {
 
     @SerializedName("title")

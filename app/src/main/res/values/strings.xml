@@ -2,8 +2,12 @@
     <string name="app_name">Sunil</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_title">Sunil</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="callback_error">Something went wrong. Please check logs</string>
+    <string name="load_data">Tap on Floating Action Button to fetch data</string>
+    <string name="network_error">No Internet Connection</string>
+
 </resources>

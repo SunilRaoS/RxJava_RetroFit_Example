@@ -1,0 +1,86 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="headerViewModel"
+            type="com.telstra.sunil.viewmodel.ItemRowViewModel" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/item_row_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_2dp"
+        android:background="@drawable/card_view_bg"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:padding="@dimen/dimen_4dp"
+        app:cardElevation="5dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/card_view_bg"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/label_row_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/dimen_16dp"
+                android:layout_marginStart="@dimen/dimen_16dp"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:paddingBottom="@dimen/dimen_4dp"
+                android:text="@{headerViewModel.title}"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                tools:ignore="RtlCompat"
+                tools:text="Telstra" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/label_row_title">
+
+                <TextView
+                    android:id="@+id/label_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    android:layout_marginEnd="@dimen/dimen_16dp"
+                    android:layout_marginStart="@dimen/dimen_16dp"
+                    android:layout_marginTop="@dimen/dimen_4dp"
+                    android:layout_weight="0.8"
+                    android:text="@{headerViewModel.description}"
+                    android:textColor="@android:color/secondary_text_light"
+                    android:textSize="15sp"
+                    tools:ignore="RtlCompat" />
+
+                <ImageView
+                    android:id="@+id/image_item"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="right"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    android:layout_marginEnd="@dimen/dimen_16dp"
+                    android:layout_marginStart="@dimen/dimen_16dp"
+                    android:layout_marginTop="@dimen/dimen_8dp"
+                    android:layout_weight="0.2"
+                    android:visibility="gone"
+                    tools:imageUrl="@{headerViewModel.profileThumb}" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</layout>
