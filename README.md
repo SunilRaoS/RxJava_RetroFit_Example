@@ -22,12 +22,13 @@ API call using Retrofit and RxJava2
 * Android (RecyclerView, CardView, ..)
 
 ### About the Code
-  On click of the Floating Action Button the data will be fetched 
-  Handled the core case scenario's
-  Checking for network availability before initiating API calls
-  Setting the Title using the data fetched in response of the Network APi call.
-  Each Item in the Recycler View is dynamically sized as per the content received
-  All the images are using lazy loading c
+  * On click of the Floating Action Button the data will be fetched 
+  * Handled the core case scenario's
+  * Checking for network availability before initiating API calls
+  * Setting the Title using the data fetched in response of the Network APi call.
+  * Each Item in the Recycler View is dynamically sized as per the content received
+  * All the images are using lazy loading 
+  * Added basic Test cases
 
 
 ### Example Output
