@@ -11,19 +11,18 @@ import android.view.View;
 import com.telstra.sunil.R;
 import com.telstra.sunil.model.HeaderListData;
 import com.telstra.sunil.model.RowItem;
+import com.telstra.sunil.network.ApiCallHelper;
+import com.telstra.sunil.network.ApiCallback;
 import com.telstra.sunil.network.ApiClient;
+import com.telstra.sunil.network.ApiService;
 import com.telstra.sunil.utility.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
-
 
 public class HeaderViewModel extends Observable {
 
@@ -66,30 +65,31 @@ public class HeaderViewModel extends Observable {
     }
 
     private void fetchData() {
+        io.reactivex.Observable<HeaderListData> responseObservable = ApiClient
+                .getClient()
+                .create(ApiService.class)
+                .fetchRows();
 
-        Disposable disposable = ApiClient.getRetrofitService().fetchRows()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .unsubscribeOn(Schedulers.io())
-                .subscribe(new Consumer<HeaderListData>() {
-                    @Override
-                    public void accept(HeaderListData headerListData) throws Exception {
-                        Log.d(TAG, "List of data = " + headerListData);
-                        updateRowDataList(headerListData.getRows(), headerListData.getTitle());
-                        progressBar.set(View.GONE);
-                        rowLabel.set(View.GONE);
-                        rowRecycler.set(View.VISIBLE);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Log.d(TAG, "List of data = " + throwable.getMessage());
-                        messageLabel.set(context.getString(R.string.callback_error));
-                        progressBar.set(View.GONE);
-                        rowLabel.set(View.VISIBLE);
-                        rowRecycler.set(View.GONE);
-                    }
-                });
+        Disposable disposable = ApiCallHelper.call(responseObservable, new ApiCallback<HeaderListData>() {
+            @Override
+            public void onSuccess(HeaderListData headerListData) {
+                Log.d(TAG, "List of data = " + headerListData);
+                updateRowDataList(headerListData.getRows(), headerListData.getTitle());
+                progressBar.set(View.GONE);
+                rowLabel.set(View.GONE);
+                rowRecycler.set(View.VISIBLE);
+            }
+
+            @Override
+            public void onFailed(Throwable throwable) {
+                Log.d(TAG, "Error = " + throwable.getMessage());
+                messageLabel.set(context.getString(R.string.callback_error));
+                progressBar.set(View.GONE);
+                rowLabel.set(View.VISIBLE);
+                rowRecycler.set(View.GONE);
+            }
+        });
+
         compositeDisposable.add(disposable);
     }
 

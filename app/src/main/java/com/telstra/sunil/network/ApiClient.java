@@ -13,7 +13,7 @@ public class ApiClient {
     private static Retrofit retrofit = null;
     private static ApiService apiService;
 
-    private static Retrofit getClient() {
+    public static Retrofit getClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(Utils.BASE_URL)
