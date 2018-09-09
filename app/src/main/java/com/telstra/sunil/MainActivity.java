@@ -1,32 +1,21 @@
 package com.telstra.sunil;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.telstra.sunil.databinding.ActivityMainBinding;
-import com.telstra.sunil.model.HeaderListData;
-import com.telstra.sunil.network.ApiClient;
-import com.telstra.sunil.utility.Utils;
 import com.telstra.sunil.viewmodel.HeaderViewModel;
 
 import java.util.Observable;
 import java.util.Observer;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Observer {
@@ -59,32 +48,6 @@ public class MainActivity extends AppCompatActivity
         //Add Observable
         headerViewModel.addObserver(this);
 
-        // fetchData(getApplicationContext());
-    }
-
-    private void fetchData(Context applicationContext) {
-        if (!Utils.isNetworkAvailable(applicationContext)) {
-            Snackbar.make(findViewById(R.id.fab), "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-            return;
-        }
-
-        //TODO : to be moved to ViewModel, when UI is created
-        Disposable disposable = ApiClient.getRetrofitService().fetchRows()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .unsubscribeOn(Schedulers.io())
-                .subscribe(new Consumer<HeaderListData>() {
-                    @Override
-                    public void accept(HeaderListData headerListData1) throws Exception {
-                        Log.d(TAG, "List of data = " + headerListData1);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Log.d(TAG, "List of data = " + throwable.getMessage());
-                    }
-                });
     }
 
     @Override
@@ -155,17 +118,17 @@ public class MainActivity extends AppCompatActivity
      */
     @Override
     public void update(Observable o, Object arg) {
-        if(o instanceof HeaderViewModel) {
+        if (o instanceof HeaderViewModel) {
             HeaderDataAdapter headerDataAdapter = (HeaderDataAdapter) activityMainBinding.listRow.getAdapter();
             HeaderViewModel headerViewModel = (HeaderViewModel) o;
             if (headerDataAdapter != null) {
-                for(int i = 0; i < headerViewModel.getRowItemList().size(); i++) {
-                    if(headerViewModel.getRowItemList().get(i).getTitle() == null &&
+                for (int i = 0; i < headerViewModel.getRowItemList().size(); i++) {
+                    if (headerViewModel.getRowItemList().get(i).getTitle() == null &&
                             headerViewModel.getRowItemList().get(i).getImageHref() == null &&
                             headerViewModel.getRowItemList().get(i).getDescription() == null)
-                            headerViewModel.getRowItemList().remove(i);
+                        headerViewModel.getRowItemList().remove(i);
 
-                    if(headerViewModel.getRowItemList().get(i).getTitle() == null &&
+                    if (headerViewModel.getRowItemList().get(i).getTitle() == null &&
                             headerViewModel.getRowItemList().get(i).getDescription() == null)
                         headerViewModel.getRowItemList().remove(i);
                 }

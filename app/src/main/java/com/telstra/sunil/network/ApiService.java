@@ -4,8 +4,10 @@ import com.telstra.sunil.model.HeaderListData;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
-import retrofit2.http.Url;
 
+/**
+ * Interface defining all the API calling method signatures.
+ */
 public interface ApiService {
 
     // Fetch the data

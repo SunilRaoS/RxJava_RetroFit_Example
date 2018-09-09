@@ -24,6 +24,12 @@ import java.util.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
+/**
+ * ViewModel for handling the Main Activity data,
+ * In this class we initiate the network call to fetch the JSON data.
+ * Based on the response we update the MainActivity Title & also the data for RecyclerView
+ * In this case holds reference to the UI handling.
+ */
 public class HeaderViewModel extends Observable {
 
     private static final String TAG = HeaderViewModel.class.getSimpleName();
@@ -57,7 +63,6 @@ public class HeaderViewModel extends Observable {
         fetchData();
     }
 
-    //It is "public" to show an example of test
     public void initializeViews() {
         rowLabel.set(View.GONE);
         rowRecycler.set(View.GONE);

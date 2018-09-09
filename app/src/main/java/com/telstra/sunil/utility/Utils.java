@@ -4,6 +4,9 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+/**
+ * Common Utility method & constants
+ */
 public class Utils {
     public static final String BASE_URL = "https://dl.dropboxusercontent.com/";
 

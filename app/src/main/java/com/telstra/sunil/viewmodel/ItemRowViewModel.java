@@ -9,14 +9,16 @@ import com.bumptech.glide.Glide;
 import com.telstra.sunil.R;
 import com.telstra.sunil.model.RowItem;
 
-
-
+/**
+ * This class is responsible to update the individual Rows of the recycler View
+ * We get the data from the RecyclerView Adapter class
+ */
 public class ItemRowViewModel extends BaseObservable {
 
     private RowItem rowItem;
     private Context context;
 
-    public ItemRowViewModel(RowItem rowItem, Context context){
+    public ItemRowViewModel(RowItem rowItem, Context context) {
         this.rowItem = rowItem;
         this.context = context;
     }
@@ -26,7 +28,8 @@ public class ItemRowViewModel extends BaseObservable {
     }
 
     // Loading Image using Glide Library.
-    @BindingAdapter("imageUrl") public static void setImageUrl(ImageView imageView, String url){
+    @BindingAdapter("imageUrl")
+    public static void setImageUrl(ImageView imageView, String url) {
         Glide.with(imageView.getContext())
                 .load(url)
                 .placeholder(R.drawable.ic_menu_gallery)
@@ -36,7 +39,9 @@ public class ItemRowViewModel extends BaseObservable {
         Glide.getPhotoCacheDir(imageView.getContext());
     }
 
-    public String getTitle() { return rowItem.getTitle(); }
+    public String getTitle() {
+        return rowItem.getTitle();
+    }
 
     public String getProfileThumb() {
         return rowItem.getImageHref();

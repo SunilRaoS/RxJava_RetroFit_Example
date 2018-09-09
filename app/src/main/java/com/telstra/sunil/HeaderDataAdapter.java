@@ -13,7 +13,11 @@ import com.telstra.sunil.viewmodel.ItemRowViewModel;
 import java.util.Collections;
 import java.util.List;
 
-
+/**
+ * Defining a Recycler View Adapter, this Adapter gets the data from the ViewModel
+ * as soon as the Databinding Observable gets called,
+ * Adapter class also gets the clean data from the Observable update() method
+ */
 public class HeaderDataAdapter extends RecyclerView.Adapter<HeaderDataAdapter.RowItemAdapterViewHolder> {
 
     private List<RowItem> rowItems;
@@ -33,7 +37,7 @@ public class HeaderDataAdapter extends RecyclerView.Adapter<HeaderDataAdapter.Ro
     public void onBindViewHolder(RowItemAdapterViewHolder holder, int position) {
         holder.bindRowView(rowItems.get(position));
 
-        if(rowItems.get(position).getDescription() == null) {
+        if (rowItems.get(position).getDescription() == null) {
             holder.itemRowsBinding.imageItem.setVisibility(View.GONE);
             holder.itemRowsBinding.labelDescription.setVisibility(View.GONE);
         } else {
