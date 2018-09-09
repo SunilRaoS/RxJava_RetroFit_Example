@@ -16,7 +16,7 @@ API call using Retrofit and RxJava2
 * RxJava2
 * Glide
 * Data Binding
-* Expresso
+* Espresso
 * Mockito
 * JUnit
 * Android (RecyclerView, CardView, ..)
