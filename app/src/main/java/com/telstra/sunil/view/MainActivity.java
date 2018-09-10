@@ -1,7 +1,11 @@
 package com.telstra.sunil.view;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.LifecycleRegistry;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,28 +15,30 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.telstra.sunil.view.adapter.HeaderDataAdapter;
 import com.telstra.sunil.R;
 import com.telstra.sunil.databinding.ActivityMainBinding;
+import com.telstra.sunil.view.adapter.HeaderDataAdapter;
 import com.telstra.sunil.viewmodel.HeaderViewModel;
 
 import java.util.Observable;
 import java.util.Observer;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, Observer {
+        implements NavigationView.OnNavigationItemSelectedListener, Observer, LifecycleOwner {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private ActivityMainBinding activityMainBinding;
     private HeaderViewModel headerViewModel;
+    private LifecycleRegistry mLifecycleRegistry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        headerViewModel = new HeaderViewModel(this);
-        activityMainBinding.setHeaderViewModel(headerViewModel);
 
+        mLifecycleRegistry = new LifecycleRegistry(this);
+        mLifecycleRegistry.markState(Lifecycle.State.CREATED);
+
+        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         setSupportActionBar(activityMainBinding.toolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -42,6 +48,21 @@ public class MainActivity extends AppCompatActivity
 
         activityMainBinding.navView.setNavigationItemSelectedListener(this);
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mLifecycleRegistry.markState(Lifecycle.State.STARTED);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        headerViewModel = new HeaderViewModel(this);
+        activityMainBinding.setHeaderViewModel(headerViewModel);
+
         //Creating Adapter
         HeaderDataAdapter headerDataAdapter = new HeaderDataAdapter();
         activityMainBinding.listRow.setAdapter(headerDataAdapter);
@@ -50,6 +71,12 @@ public class MainActivity extends AppCompatActivity
         //Add Observable
         headerViewModel.addObserver(this);
 
+    }
+
+    @NonNull
+    @Override
+    public Lifecycle getLifecycle() {
+        return mLifecycleRegistry;
     }
 
     @Override
