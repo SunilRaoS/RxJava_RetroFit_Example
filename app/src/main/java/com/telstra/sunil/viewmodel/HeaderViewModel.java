@@ -85,7 +85,7 @@ public class HeaderViewModel extends Observable {
             @Override
             public void onSuccess(HeaderListData headerListData) {
                 Log.d(TAG, "List of data = " + headerListData);
-                if(headerListData == null) {
+                if (headerListData == null) {
                     messageLabel.set(context.getString(R.string.callback_error));
                     progressBar.set(View.GONE);
                     rowLabel.set(View.VISIBLE);

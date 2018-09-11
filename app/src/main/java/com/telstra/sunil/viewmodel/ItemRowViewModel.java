@@ -23,10 +23,6 @@ public class ItemRowViewModel extends BaseObservable {
         this.context = context;
     }
 
-    public String getDescription() {
-        return rowItem.getDescription();
-    }
-
     // Loading Image using Glide Library.
     @BindingAdapter("imageUrl")
     public static void setImageUrl(ImageView imageView, String url) {
@@ -37,6 +33,10 @@ public class ItemRowViewModel extends BaseObservable {
                 .into(imageView);
 
         Glide.getPhotoCacheDir(imageView.getContext());
+    }
+
+    public String getDescription() {
+        return rowItem.getDescription();
     }
 
     public String getTitle() {
