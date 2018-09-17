@@ -2,6 +2,7 @@
 
 ## RecyclerView with RxJava+RetroFit
 API call using Retrofit and RxJava2
+Reading data from https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.js
 
 ### About Architecture 
 
