@@ -1,4 +1,7 @@
 
+## Circle CI Build status
+
+[![CircleCI](https://circleci.com/gh/SunilRaoS/RxJava_RetroFit_Example/tree/master.svg?style=svg)](https://circleci.com/gh/SunilRaoS/RxJava_RetroFit_Example/tree/master)
 
 ## RecyclerView with RxJava+RetroFit
 API call using Retrofit and RxJava2
